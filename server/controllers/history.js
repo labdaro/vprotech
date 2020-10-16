@@ -15,3 +15,21 @@ exports.history = async(req,res)=>{
         res.json("error")
     }
 }
+
+
+exports.checkImportExport = async(req,res)=>{
+    console.log(req.body)
+    const startDate = req.body.startDate
+    const end = req.body.endDate 
+    const endDate = new Date(end)
+    endDate.setHours(endDate.getHours()+23,59)
+    
+    try{
+        const data = await historyModel.find({product_type: req.body.product_type, date: { $gte: startDate, $lte: endDate}}).sort({ date: -1 })
+        res.json(data)
+    
+    }
+    catch(err){
+        res.status(400).json('error')
+    }
+}

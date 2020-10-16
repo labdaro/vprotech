@@ -12,7 +12,6 @@
               <div>
               <span class="display-2 mt-n2 grey--text font-weight-bold">{{ totalPriceExports  }}$</span>
               </div>
-              <span class="caption subheading">Total Out</span>
             </v-card-text>
           </v-card>
         </v-col>
@@ -48,6 +47,8 @@
       </v-row>
     </div>
     <Datatable
+      :start="startDate"
+      :end="endDate"
       :items="weeklyPlate"
       :headers="headers"
       :search="search"
@@ -64,6 +65,8 @@ export default {
     Datatable,
   },
   data: () => ({
+    startDate:'',
+    endDate:'',
     totalStock: 0,
     totalAmountExports:0,
     totalPriceExports:0,
@@ -86,6 +89,7 @@ export default {
       { text: "Status", value: "status", align: "center" },
       { text: "Time", value: "time" },
       { text: "Date", value: "date" },
+      { text: "View", value: "view",align: "center" },
     ],
   }),
   methods: {
@@ -105,6 +109,8 @@ export default {
           dateB = new Date(b);
         return dateA - dateB;
       });
+      this.startDate = sortedDate[0]
+      this.endDate = sortedDate[1]
      const data = await makePostRequest("/monthly/all_monthly", {
           startDate: sortedDate[0],
           endDate: sortedDate[1],     

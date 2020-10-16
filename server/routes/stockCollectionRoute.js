@@ -8,4 +8,6 @@ const stockCollection = require('../controllers/stockCollection')
 router.post('/all_monthly',checkAuth,stockCollection.all_monthly)
 router.get('/all_stock',checkAuth,stockCollection.all_stock)
 router.get('/history',checkAuth,stockCollection.history)
+router.post('/checkone',checkAuth,stockCollection.checkOne)
+
 module.exports = router

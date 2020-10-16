@@ -1,4 +1,3 @@
-// datatable used for All plate and weekly plate
 
 <template>
   <v-card>
@@ -33,31 +32,32 @@
         <v-chip small :color="`${item.type}`" :class="`v-chip--active  red--text`">{{ item.product_id }}</v-chip>
       </template>
       <template v-slot:item.view="{ item }">
-        <v-btn icon @click="openDialog(item)">
-          <v-icon>{{ view }}</v-icon>
-        </v-btn>
-        <v-btn icon color="red" x-small @click="deletePlate(item._id)">
-          <v-icon>{{ remove }}</v-icon>
-        </v-btn>
+        <Dialogs :item="item" :end="end" :start="start"/>
       </template>
     </v-data-table>
   </v-card>
 </template>
 
 <script>
+import Dialogs from '../Dialogs'
 import { mdiPlus as add, mdiEye as view, mdiTrashCan as remove } from "@mdi/js";
 export default {
   props: {
+    end: String,
+    start:String,
     search: String,
     items: Array,
     headers: Array,
     title: String
   },
+    components: {
+    Dialogs,
+  },
   data: () => ({
-     dialog: false,
     add,
     view,
-    remove
+    remove,
+    dialog: false,
   })
 };
 </script>

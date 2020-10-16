@@ -11,6 +11,14 @@ exports.all_stock = async(req,res)=>{
         res.json(err)
     }
 } 
+exports.checkOne = async(req,res)=>{
+    try{
+        const stock = await stockcollection.find({product_type: req.body.product_type})
+        res.json(stock)
+    }catch(err){
+        res.json(err)
+    }
+} 
 
 exports.all_monthly = async(req,res)=>{
     const startDate = req.body.startDate
