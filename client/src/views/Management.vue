@@ -4,7 +4,6 @@
       <v-tab class>Import Product</v-tab>
       <v-tab class>Export Product</v-tab>
     </v-tabs>
-
     <RegisterPlateDialog
       :dialog="registerKnownPlatesDialog"
       title="Import Product"

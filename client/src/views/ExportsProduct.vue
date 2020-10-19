@@ -3,7 +3,7 @@
     <div>
       <v-row>
         <v-col cols="12" sm="6" lg="3">
-          <v-card id="known" class @click="type = 'out'">
+          <v-card>
             <v-card-text class="mb-1">
               <div class="display-2 mt-n2 red--text font-weight-bold">
                 <span>Export</span> 
@@ -93,15 +93,7 @@ export default {
     ],
   }),
   methods: {
-    // async getAllWeeklyPlate() {
-    //   const data = await makeGetRequest("/monthly/all_monthly");
-    //   this.weeklyPlate = data.all_monthly;
 
-    //     this.weeklyPlate.forEach((x) => {
-    //       x.date = x.date.slice(0, 10) ;
-    //     });
-      
-    // },
     async postDateSpan() {
       this.$refs.menu.save(this.date);
       var sortedDate = this.date.sort(function(a, b) {
@@ -117,8 +109,9 @@ export default {
       });
          
       this.weeklyPlate = data.all_monthly
+      console.log(data)
       this.totalAmountExports = data.amountExport
-      this.totalPriceExports = data.sumImportPrice
+      this.totalPriceExports = data.totalPriceExports
       
         
         this.weeklyPlate.forEach((x) => {

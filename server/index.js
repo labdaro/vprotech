@@ -4,7 +4,7 @@ require('dotenv').config()
 const express = require('express')
 const mongoose = require('mongoose')
 const cors = require("cors");
- 
+  
 const commitlog = require('./routes/commitlog')
 const weekly = require('./routes/weekly')
 const collectionRoute = require('./routes/collection')

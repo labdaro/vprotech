@@ -1,6 +1,6 @@
 
 <template>
-  <v-card>
+  <v-card>{{search}}
     <v-card-title>
       <v-row>
         <v-col cols="12" sm="12" md="8" xl="9">
@@ -58,7 +58,7 @@ export default {
     view,
     remove,
     dialog: false,
-  })
+  }),
 };
 </script>
 

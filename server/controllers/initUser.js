@@ -18,7 +18,7 @@ module.exports = async (userModel) => {
           }
           const newUser = await userModel.create({
             password: hashedPassword,
-            email: "admin@gmail.com",
+            email: "admin",
           });
           console.log("Root user created successfully");
         }

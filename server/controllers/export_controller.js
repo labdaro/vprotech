@@ -62,7 +62,6 @@ exports.all_monthly = async(req,res)=>{
 }
 
 exports.insert_export = async (req,res)=>{
-    console.log(req.body)
     const findProduct = await stockCollection.find({product_type: req.body.product_type}).select('total_amount')
     //inStock amount
     if ( Object.keys(findProduct).length){
@@ -74,7 +73,14 @@ exports.insert_export = async (req,res)=>{
     const RemainStock = await stockCollection.updateOne({product_type: req.body.product_type},{ $set: {total_amount: exportAmount }})
     console.log('Update 1 document')
     const total_price = req.body.price_1unit * req.body.total_amount
-
+    var date = new Date()
+        var options = {
+            hour: 'numeric',
+            minute: 'numeric',
+            second: 'numeric',
+            hour12: true
+        };
+    var timeString = date.toLocaleString('th-TH',options);
     const exportResult = new exportModel({
         product_id: req.body.product_id,
         product_type: req.body.product_type,
@@ -82,6 +88,7 @@ exports.insert_export = async (req,res)=>{
         total_price: total_price,
         price_1unit:req.body.price_1unit,
         status: "export",
+        time: timeString,
         date: req.body.date
     })
     const historyResult = new historyModel({

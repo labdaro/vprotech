@@ -101,11 +101,12 @@ export default {
       this.allStock = data
       this.allStock.filter((x)=>{
         x.total_price = x.price_1unit * x.total_amount
+        // x.date = x.date.slice(0, 10);
       })
 
-      this.current_in_plate.forEach((x) => {
-        x.date = x.date.slice(0, 10);
-      });
+      // this.current_in_plate.forEach((x) => {
+      //   x.date = x.date.slice(0, 10);
+      // });
       
     },
   },
