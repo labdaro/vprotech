@@ -10,7 +10,7 @@
           <v-card id="total" class @click="type = 'all'">
             <v-card-text class="mb-1">
               <div class="display-2 mt-n2 blue--text font-weight-bold" >
-                {{item.product_type}} {{ totalPlates }}
+                {{item.product_type}}
               </div>
               <span class="caption" >Price for 1 unit: {{item.price_1unit}}$ </span>
               <h3>Total Amount: {{item.total_amount}}</h3>
@@ -18,42 +18,11 @@
             </v-card-text>
           </v-card>
         </v-col>
-        <!-- <v-col cols="12" sm="6" lg="3">
-          <v-card id="known" class @click="type = 'known'">
-            <v-card-text class="mb-1">
-              <div class="display-2 mt-n2 green--text font-weight-bold">
-               HHD {{ knownPlates }}
-              </div>
-              <span class="caption subheading">Known Plate</span>
-            </v-card-text>
-          </v-card>
-        </v-col>
-        <v-col cols="12" sm="6" lg="3">
-          <v-card id="unknown" class @click="type = 'unknown'">
-            <v-card-text class="mb-1">
-              <div class="display-2 mt-n2 orange--text font-weight-bold">
-               GPS {{ unknownPlates }}
-              </div>
-              <span class="caption subheading">Unknown Plate</span>
-            </v-card-text>
-          </v-card>
-        </v-col>
-        <v-col cols="12" sm="6" lg="3">
-          <v-card id="bad" class @click="type = 'bad'">
-            <v-card-text class="mb-1">
-              <div class="display-2 mt-n2 red--text font-weight-bold">
-              Keyboard  {{ badPlates }}
-              </div>
-              <span class="caption font-weight-light">Bad Plate</span>
-            </v-card-text>
-          </v-card>
-        </v-col> -->
       </v-row>
     </div>
     <Datatable
-      :items="typeOfPlate"
+      :items="allStock"
       :headers="headers"
-      :search="search"
       title="Stock Available"
     ></Datatable>
   </v-container>
@@ -70,20 +39,13 @@ export default {
 
   data() {
     return {
-      colors:["red","yellow","blue","red","green","purple"],
       allStock:[],
       polling: null,
-      totalPlates: "",
-      knownPlates: "",
-      unknownPlates: "",
-      badPlates: "",
-      current_in_plate: [],
-      type: "all",
       search: "",
       headers: [
         {
           text: "Product Type",
-          value: "id",
+          value: "product_type",
           align: "center",
         },
         { text: "Product ID", value: "product_id" },
@@ -101,7 +63,7 @@ export default {
       this.allStock = data
       this.allStock.filter((x)=>{
         x.total_price = x.price_1unit * x.total_amount
-        // x.date = x.date.slice(0, 10);
+        x.date = x.date.slice(0, 10);
       })
 
       // this.current_in_plate.forEach((x) => {
@@ -118,23 +80,6 @@ export default {
     clearInterval(this.polling);
   },
   mounted() {},
-  computed: {
-    typeOfPlate() {
-      return this[this.type];
-    },
-    all() {
-      return this.current_in_plate;
-    },
-    known() {
-      return this.current_in_plate.filter((e) => e.type === "known");
-    },
-    unknown() {
-      return this.current_in_plate.filter((e) => e.type === "unknown");
-    },
-    bad() {
-      return this.current_in_plate.filter((e) => e.type === "bad");
-    },
-  },
 };
 </script>
 

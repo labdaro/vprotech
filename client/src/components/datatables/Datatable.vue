@@ -1,6 +1,6 @@
 
 <template>
-  <v-card>{{search}}
+  <v-card>
     <v-card-title>
       <v-row>
         <v-col cols="12" sm="12" md="8" xl="9">
@@ -19,7 +19,7 @@
       :items-per-page="5"
       class="elevation-1 px-5"
     >
-      <template v-slot:item.id="{ item }">
+      <template v-slot:item.product_type="{ item }">
         <v-card>
           <v-card-text class="my-1 plate_format text-center">
             <v-row>
@@ -28,8 +28,8 @@
           </v-card-text>
         </v-card>
       </template>
-      <template v-slot:item.type="{item}">
-        <v-chip small :color="`${item.type}`" :class="`v-chip--active  red--text`">{{ item.product_id }}</v-chip>
+      <template v-slot:item.product_id="{item}">
+        <v-chip small :color="`${item.product_id}`" :class="`v-chip--active  red--text`">{{ item.product_id }}</v-chip>
       </template>
       <template v-slot:item.view="{ item }">
         <Dialogs :item="item" :end="end" :start="start"/>
@@ -45,7 +45,6 @@ export default {
   props: {
     end: String,
     start:String,
-    search: String,
     items: Array,
     headers: Array,
     title: String
@@ -54,6 +53,7 @@ export default {
     Dialogs,
   },
   data: () => ({
+    search:'',
     add,
     view,
     remove,

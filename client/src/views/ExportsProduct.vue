@@ -81,9 +81,9 @@ export default {
         text: "Product ID",
         align: "center",
         sortable: false,
-        value: "id",
+        value: "product_id",
       },
-      { text: "Product Type", value: "type" },
+      { text: "Product Type", value: "product_type" },
       { text: "Total Amount", value: "total_amount" },
       { text: "Total Price", value: "total_price" },
       { text: "Status", value: "status", align: "center" },
@@ -109,7 +109,6 @@ export default {
       });
          
       this.weeklyPlate = data.all_monthly
-      console.log(data)
       this.totalAmountExports = data.amountExport
       this.totalPriceExports = data.totalPriceExports
       

@@ -84,16 +84,17 @@ export default {
     tab: null,
     headers: [
       {
-        text: "Product Type",
-        value: "id",
+        text: "Product ID",
         align: "center",
+        sortable: false,
+        value: "product_id",
       },
-      { text: "Product ID", value: "product_id" },
+      { text: "Product Type",align: "center", value: "product_type", sortable: true,},
       { text: "Total Amount", value: "total_amount" },
-      { text: "Price 1Unit($)", value: "price_1unit" },
-      { text: "Total Price($)", value: "total_price" },
+      { text: "Total Price", value: "total_price" },
+      { text: "Status", value: "status", align: "center" },
+      { text: "Time", value: "time" },
       { text: "Date", value: "date" },
-      { text: "Status", value: "status" },
       { text: "View", value: "view" },
     ],
     fields_known: [
@@ -147,8 +148,9 @@ export default {
     },
 
     async registerKnownPlates() {
-      await makePostRequest("/imports/insert", this.registerInfo);
-      this.getKnownPlates();
+    await makePostRequest(" imports/insert", this.registerInfo);
+    
+     this.getKnownPlates();
       this.registerKnownPlatesDialog = false;
     },
     closeRegisterKnownPlatesDialog() {
@@ -160,10 +162,16 @@ export default {
       this.registerBadPlatesDialog = true;
     },
     async registerBadPlates() {
-
-      await makePostRequest("/exports/insert", this.registerInfo);
+     try{
+       await makePostRequest("exports/insert", this.registerInfo);
       this.getBadPlates();
       this.registerBadPlatesDialog = false;
+     }
+     catch(err){
+       alert("Can't find the Product name in Stock...Please check Product name again.")
+       this.registerBadPlatesDialog = true
+       console.log(err)
+     }
     },
     closeRegisterBadPlatesDialog() {
       this.registerBadPlatesDialog = false;
